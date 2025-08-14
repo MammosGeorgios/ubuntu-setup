@@ -3,21 +3,12 @@
 # Update apt
 sudo apt update
 
-# Install basic tools TODO
-sudo apt install -y curl 
+# Common tools/utils
+chmod +x /scripts.tools.sh
+./scripts/tools.sh
 
-# Install zsh + oh-my-zsh
-sudo apt install -y zsh
-chsh -s $(which zsh)
+# Any software languages setups
+./scripts/languages.sh
 
-# TODO: Check if directory is already set up
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-
-# Java
-sudo apt install maven
-sudo apt install openjdk-21-jdk 
-
-
-# Python
-sudo apt install python3
+# Zsh terminal setup 
+./scripts/zsh.sh
