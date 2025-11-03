@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo 'Executing java script (Sdkman, Java and maven)'
+
+sudo apt install curl
+
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Avoiding on purpose to specify version, expecting the latest release.
+# If needed sdk can be used to get specific versions (sdk help)
+sdk install java
+sdk install maven

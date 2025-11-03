@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Install zsh + oh-my-zsh
+
+echo "Executing Zsh script"
 sudo apt install -y zsh
 chsh -s $(which zsh)
 
 
+sudo apt install curl
 # TODO: Check if directory is already set up
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

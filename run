@@ -1,0 +1,59 @@
+#!/bin/bash
+
+#############################################
+# Util methods
+log(){
+    if [[ $is_dry_run == "1" ]]; then
+        echo "[DRY_RUN]: $@"
+    else
+        echo "$@"
+    fi
+}
+
+execute(){
+    log "Execute $@"
+    if [[ $is_dry_run == "1" ]]; then
+        return
+    fi
+       
+    "$@"
+}
+#############################################
+# Properties setup
+
+script_filter=""
+is_dry_run="0"
+
+while [[ $# > 0 ]]; do
+    if [[ $1 == "--dry" ]]; then
+        is_dry_run="1"
+    else 
+        script_filter="$1"
+    fi
+
+    shift
+done
+
+
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+
+log "script_dir=$script_dir"
+log "script_filter=$script_filter"
+log "------- LOOPING SCRIPTS -------"
+
+cd $script_dir
+scripts=$(find ./runs -maxdepth 1 -mindepth 1 -executable -type f)
+
+for script in $scripts; do
+
+    if echo "$script" | grep -qv "$script_filter"; then
+        log "Skip $script"
+        continue
+    fi
+
+    execute ./$script
+done
+
+
+log "------- END -------"
+
