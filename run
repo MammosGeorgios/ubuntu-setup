@@ -9,5 +9,17 @@ echo "script_dir=$script_dir"
 filter1="$1"
 echo "filter1=$filter1"
 
+is_dry_run = false
+#TODO
+
 cd $script_dir
-find ./runs -maxdepth 1 -mindepth 1 -executable -type f
+scripts=$(find ./runs -maxdepth 1 -mindepth 1 -executable -type f)
+
+for script in $scripts; do
+    if echo "$script" | grep -qv "$filter"; then
+        echo "filtering $script"
+        continue
+    fi
+
+    ./$script
+done
