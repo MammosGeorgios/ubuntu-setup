@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "------- STARTING RUN -------"
+
+# Properties setup
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+echo "script_dir=$script_dir"
+
+filter1="$1"
+echo "filter1=$filter1"
+
+cd $script_dir
+find ./runs -maxdepth 1 -mindepth 1 -executable -type f
