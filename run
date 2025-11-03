@@ -9,7 +9,7 @@ echo "script_dir=$script_dir"
 filter1="$1"
 echo "filter1=$filter1"
 
-is_dry_run = false
+is_dry_run= false
 #TODO
 
 cd $script_dir
